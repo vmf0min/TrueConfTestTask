@@ -10,19 +10,19 @@
 #include "../header/sync_vector_map.h"
 
 bool sync::VectorMap::SyncRoutine() {
-  auto iter_out{vec_.rbegin()};
+  auto iter_last_pos{vec_.rbegin()};
   for (auto it{vec_.rbegin()}; it != vec_.rend(); ++it) {
-    auto iter{map_.find(*it)};
-    if (iter == map_.end()) std::swap(*it, *(iter_out++));
+    auto find_vec_in_map{map_.find(*it)};
+    if (find_vec_in_map == map_.end()) std::swap(*it, *(iter_last_pos++));
   }
-  vec_.resize(vec_.size() - (iter_out - vec_.rbegin()));
+  vec_.resize(vec_.size() - (iter_last_pos - vec_.rbegin()));
 
   std::sort(vec_.begin(), vec_.end());
-  std::map<int32_t, int64_t> new_map;
+  std::map<int32_t, int64_t> tmp_map;
   for (auto&& [key_digit, n_digits] : map_)
     if (std::binary_search(vec_.begin(), vec_.end(), key_digit))
-      new_map[key_digit] = n_digits;
-  map_ = std::move(new_map);
+      tmp_map[key_digit] = n_digits;
+  map_ = std::move(tmp_map);
 
   return sync::VectorMapCheck(vec_, map_);
 }
