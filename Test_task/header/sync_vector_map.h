@@ -22,27 +22,18 @@ using Map_t = std::map<int32_t, int64_t>;
 
 class VectorMap {
  public:
-  VectorMap() = default;
-  VectorMap(Vector_t& vec, Map_t& map)
-      : vec_{std::move(vec)}, map_{std::move(map)} {
-    Sync();
-  }
+  VectorMap() = delete;
+  VectorMap(Vector_t& vec, Map_t& map);
   ~VectorMap() = default;
 
-  void Sync() {
-    RemoveLastVectorElements();
-    RemoveLastMapElements();
-    while (!SyncRoutine()) {
-    }
-  }
+  // TODO придумать, что делать с этим
+  // auto GetVector() { return vec_; }
+  // void SetVector(const Vector_t& vec) { vec_ = vec; };
+  // void SetVector(Vector_t&& vec) { vec_ = std::move(vec); };
 
-  auto GetVector() { return vec_; }
-  void SetVector(const Vector_t& vec) { vec_ = vec; };
-  void SetVector(Vector_t&& vec) { vec_ = std::move(vec); };
-
-  auto GetMap() { return map_; }
-  void SetMap(const Map_t& map) { map_ = map; };
-  void SetMap(Map_t&& map) { map_ = std::move(map); };
+  // auto GetMap() { return map_; }
+  // void SetMap(const Map_t& map) { map_ = map; };
+  // void SetMap(Map_t&& map) { map_ = std::move(map); };
 
  private:
   bool SyncRoutine();

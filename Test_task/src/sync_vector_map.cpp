@@ -9,6 +9,16 @@
 
 #include "../header/sync_vector_map.h"
 
+sync::VectorMap::VectorMap(Vector_t& vec, Map_t& map)
+    : vec_{std::move(vec)}, map_{std::move(map)} {
+  RemoveLastVectorElements();
+  RemoveLastMapElements();
+  while (!SyncRoutine()) {
+  }
+  vec = std::move(vec_);
+  map = std::move(map_);
+}
+
 bool sync::VectorMap::SyncRoutine() {
   auto iter_last_pos{vec_.rbegin()};
   for (auto it{vec_.rbegin()}; it != vec_.rend(); ++it) {

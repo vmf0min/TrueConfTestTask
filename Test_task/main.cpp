@@ -24,18 +24,16 @@ bool TestSyncVectorMapClass() {
 
   const size_t test_loops{1000};
   std::vector<bool> checks(test_loops);
-  for (size_t i{}; i < test_loops; ++i) {
+  for (size_t test_step{}; test_step < test_loops; ++test_step) {
     std::vector<int32_t> vec(dist_rnd_size(rnd_size));
-    for (auto&& i : vec) i = dist_plane_digits(rnd_plane_digits);
+    for (auto&& value : vec) value = dist_plane_digits(rnd_plane_digits);
 
     std::map<int32_t, int64_t> map;
-    for (size_t i{}; i < dist_rnd_size(rnd_size); ++i)
+    for (size_t cnt{}; cnt < dist_rnd_size(rnd_size); ++cnt)
       ++map[(dist_plane_digits(rnd_plane_digits))];
 
     sync::VectorMap sync_vector_map(vec, map);
-    vec = sync_vector_map.GetVector();
-    map = sync_vector_map.GetMap();
-    checks[i] = sync::VectorMapCheck(vec, map);
+    checks[test_step] = sync::VectorMapCheck(vec, map);
   }
 
   for (auto&& i : checks) is_sync &= i;
