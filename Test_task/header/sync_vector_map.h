@@ -1,7 +1,8 @@
 /**
  * @file      sync_vector_map.h
  * @author    vmf0min (vlifom@yandex.ru)
- * @brief     vector and map synchronize class
+ * @brief     vector and map synchronize class with random removing last
+ * elements
  * @version   0.1
  * @date      03-09-2021
  * @copyright Copyright (c) 2021
@@ -26,19 +27,9 @@ class VectorMap {
   VectorMap(Vector_t& vec, Map_t& map);
   ~VectorMap() = default;
 
-  void Synchronize() {
-    VectorMap vector_map(this->vec_, this->map_);
-    vec_ = std::move(vector_map.vec_);
-    map_ = std::move(vector_map.map_);
-  }
-
   auto GetVector() { return vec_; }
-  void SetVector(const Vector_t& vec) { vec_ = vec; };
-  void SetVector(Vector_t&& vec) { vec_ = std::move(vec); };
 
   auto GetMap() { return map_; }
-  void SetMap(const Map_t& map) { map_ = map; };
-  void SetMap(Map_t&& map) { map_ = std::move(map); };
 
  private:
   bool SyncRoutine();

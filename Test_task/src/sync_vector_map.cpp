@@ -1,7 +1,8 @@
 /**
  * @file      sync_vector_map.cpp
  * @author    vmf0min (vlifom@yandex.ru)
- * @brief     vector and map_in synchronize class
+ * @brief     vector and map synchronize class with random removing last
+ * elements
  * @version   0.1
  * @date      03-09-2021
  * @copyright Copyright (c) 2021
