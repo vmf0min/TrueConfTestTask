@@ -26,14 +26,19 @@ class VectorMap {
   VectorMap(Vector_t& vec, Map_t& map);
   ~VectorMap() = default;
 
-  // TODO придумать, что делать с этим
-  // auto GetVector() { return vec_; }
-  // void SetVector(const Vector_t& vec) { vec_ = vec; };
-  // void SetVector(Vector_t&& vec) { vec_ = std::move(vec); };
+  void Synchronize() {
+    VectorMap vector_map(this->vec_, this->map_);
+    vec_ = std::move(vector_map.vec_);
+    map_ = std::move(vector_map.map_);
+  }
 
-  // auto GetMap() { return map_; }
-  // void SetMap(const Map_t& map) { map_ = map; };
-  // void SetMap(Map_t&& map) { map_ = std::move(map); };
+  auto GetVector() { return vec_; }
+  void SetVector(const Vector_t& vec) { vec_ = vec; };
+  void SetVector(Vector_t&& vec) { vec_ = std::move(vec); };
+
+  auto GetMap() { return map_; }
+  void SetMap(const Map_t& map) { map_ = map; };
+  void SetMap(Map_t&& map) { map_ = std::move(map); };
 
  private:
   bool SyncRoutine();

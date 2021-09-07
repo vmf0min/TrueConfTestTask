@@ -33,6 +33,8 @@ bool TestSyncVectorMapClass() {
       ++map[(dist_plane_digits(rnd_plane_digits))];
 
     sync::VectorMap sync_vector_map(vec, map);
+    vec = sync_vector_map.GetVector();
+    map = sync_vector_map.GetMap();
     checks[test_step] = sync::VectorMapCheck(vec, map);
   }
 

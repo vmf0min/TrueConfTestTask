@@ -9,14 +9,11 @@
 
 #include "../header/sync_vector_map.h"
 
-sync::VectorMap::VectorMap(Vector_t& vec, Map_t& map)
-    : vec_{std::move(vec)}, map_{std::move(map)} {
+sync::VectorMap::VectorMap(Vector_t& vec, Map_t& map) : vec_{vec}, map_{map} {
   RemoveLastVectorElements();
   RemoveLastMapElements();
   while (!SyncRoutine()) {
   }
-  vec = std::move(vec_);
-  map = std::move(map_);
 }
 
 bool sync::VectorMap::SyncRoutine() {
