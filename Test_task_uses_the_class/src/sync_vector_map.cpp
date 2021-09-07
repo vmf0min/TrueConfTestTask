@@ -30,7 +30,7 @@ bool sync::VectorMap::SyncRoutine() {
   for (auto&& [key_digit, n_digits] : map_)
     if (std::binary_search(vec_.begin(), vec_.end(), key_digit))
       tmp_map[key_digit] = n_digits;
-  map_ = std::move(tmp_map);
+  std::swap(map_, tmp_map);
 
   return sync::VectorMapCheck(vec_, map_);
 }
