@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2021
  */
 
-#include "../header/sync_vector_map.h"
+#include "../include/sync_vector_map.h"
 
 bool sync::SyncRoutine(Vector_t& vec, Map_t& map) {
   auto iter_last_pos{vec.rbegin()};
@@ -54,8 +54,7 @@ void sync::RemoveLastVectorElements(Vector_t& vec) {
   for (size_t i{}; i < n_count_remove; ++i) vec.pop_back();
 }
 
-bool sync::VectorMapCheck(std::vector<int32_t>& vec,
-                          std::map<int32_t, int64_t>& map) {
+bool sync::VectorMapCheck(Vector_t& vec, Map_t& map) {
   std::set<int32_t> vec_unique_digits;
   for (auto&& i : vec) vec_unique_digits.insert(i);
 

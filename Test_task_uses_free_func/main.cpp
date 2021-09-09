@@ -12,7 +12,7 @@
  * @copyright Copyright (c) 2021
  */
 
-#include "header/sync_vector_map.h"
+#include "include/sync_vector_map.h"
 
 bool TestSyncVectorMap() {
   bool is_sync{true};

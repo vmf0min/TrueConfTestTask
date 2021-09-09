@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2021
  */
 
-#include "../header/sync_vector_map.h"
+#include "../include/sync_vector_map.h"
 
 sync::VectorMap::VectorMap(Vector_t& vec, Map_t& map) : vec_{vec}, map_{map} {
   RemoveLastVectorElements();
@@ -53,8 +53,7 @@ void sync::VectorMap::RemoveLastMapElements() {
   }
 }
 
-bool sync::VectorMapCheck(std::vector<int32_t>& vec,
-                          std::map<int32_t, int64_t>& map) {
+bool sync::VectorMapCheck(Vector_t& vec, Map_t& map) {
   std::set<int32_t> vec_unique_digits;
   for (auto&& i : vec) vec_unique_digits.insert(i);
 
