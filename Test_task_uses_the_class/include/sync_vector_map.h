@@ -37,7 +37,7 @@ class VectorMap {
   void RemoveLastVectorElements() {
     std::uniform_int_distribution<int32_t> dist_remove_n_counts(1, 15);
     auto n_count_remove{dist_remove_n_counts(rnd_remove_n_counts_)};
-    for (size_t i{}; i < n_count_remove; ++i) vec_.pop_back();
+    for (size_t i = 0; i < n_count_remove; ++i) vec_.pop_back();
   }
 
   void RemoveLastMapElements();

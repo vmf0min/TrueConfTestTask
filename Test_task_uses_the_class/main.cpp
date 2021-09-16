@@ -15,21 +15,21 @@
 #include "include/sync_vector_map.h"
 
 bool TestSyncVectorMapClass() {
-  bool is_sync{true};
+  bool is_sync = true;
   std::random_device rnd_plane_digits;
   std::uniform_int_distribution<int32_t> dist_plane_digits(1, 9);
 
   std::random_device rnd_size;
   std::uniform_int_distribution<size_t> dist_rnd_size(15, 1000);
 
-  const size_t test_loops{1000};
+  const size_t test_loops = 1000;
   std::vector<bool> checks(test_loops);
-  for (size_t test_step{}; test_step < test_loops; ++test_step) {
+  for (size_t test_step = 0; test_step < test_loops; ++test_step) {
     std::vector<int32_t> vec(dist_rnd_size(rnd_size));
     for (auto&& value : vec) value = dist_plane_digits(rnd_plane_digits);
 
     std::map<int32_t, int64_t> map;
-    for (size_t cnt{}; cnt < dist_rnd_size(rnd_size); ++cnt)
+    for (size_t cnt = 0; cnt < dist_rnd_size(rnd_size); ++cnt)
       ++map[(dist_plane_digits(rnd_plane_digits))];
 
     sync::VectorMap sync_vector_map(vec, map);

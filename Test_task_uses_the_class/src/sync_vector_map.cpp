@@ -10,7 +10,7 @@
 
 #include "../include/sync_vector_map.h"
 
-sync::VectorMap::VectorMap(Vector_t& vec, Map_t& map) : vec_{vec}, map_{map} {
+sync::VectorMap::VectorMap(Vector_t& vec, Map_t& map) : vec_(vec), map_(map) {
   RemoveLastVectorElements();
   RemoveLastMapElements();
   while (!SyncRoutine()) {
@@ -18,9 +18,9 @@ sync::VectorMap::VectorMap(Vector_t& vec, Map_t& map) : vec_{vec}, map_{map} {
 }
 
 bool sync::VectorMap::SyncRoutine() {
-  auto iter_last_pos{vec_.rbegin()};
-  for (auto it{vec_.rbegin()}; it != vec_.rend(); ++it) {
-    auto find_vec_in_map{map_.find(*it)};
+  auto iter_last_pos = vec_.rbegin();
+  for (auto it = vec_.rbegin(); it != vec_.rend(); ++it) {
+    auto find_vec_in_map = map_.find(*it);
     if (find_vec_in_map == map_.end()) std::swap(*it, *(iter_last_pos++));
   }
   vec_.resize(vec_.size() - (iter_last_pos - vec_.rbegin()));
@@ -37,11 +37,11 @@ bool sync::VectorMap::SyncRoutine() {
 
 void sync::VectorMap::RemoveLastMapElements() {
   std::uniform_int_distribution<int32_t> dist_remove_n_counts(1, 15);
-  auto n_count_remove{dist_remove_n_counts(rnd_remove_n_counts_)};
+  auto n_count_remove = dist_remove_n_counts(rnd_remove_n_counts_);
 
   while (n_count_remove) {
-    auto last{map_.rbegin()};
-    auto tmp{last->second - n_count_remove};
+    auto last = map_.rbegin();
+    auto tmp = last->second - n_count_remove;
     if (tmp < 0) {
       n_count_remove -= last->second;
       map_.erase(last->first);
