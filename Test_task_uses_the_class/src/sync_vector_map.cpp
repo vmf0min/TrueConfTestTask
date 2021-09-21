@@ -21,7 +21,7 @@ bool sync::VectorMap::SyncRoutine() {
   auto iter_last_pos = vec_.rbegin();
   for (auto it = vec_.rbegin(); it != vec_.rend(); ++it) {
     auto find_vec_in_map = map_.find(*it);
-    if (find_vec_in_map == map_.end()) std::swap(*it, *(iter_last_pos++));
+    if (find_vec_in_map == map_.end()) std::swap(*it, *iter_last_pos++);
   }
   vec_.resize(vec_.size() - (iter_last_pos - vec_.rbegin()));
 
