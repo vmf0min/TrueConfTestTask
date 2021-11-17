@@ -19,7 +19,7 @@ sync::VectorMap::VectorMap(Vector_t& vec, Map_t& map) : vec_(vec), map_(map) {
 
 bool sync::VectorMap::SyncRoutine() {
   auto iter_last_pos = vec_.rbegin();
-  for (auto it = vec_.rbegin(); it != vec_.rend(); ++it) {
+  for (auto it = vec_.rbegin(), ite = vec_.rend(); it != ite; ++it) {
     auto find_vec_in_map = map_.find(*it);
     if (find_vec_in_map == map_.end()) std::swap(*it, *iter_last_pos++);
   }

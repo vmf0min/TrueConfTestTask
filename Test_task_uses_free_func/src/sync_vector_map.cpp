@@ -12,7 +12,7 @@
 
 bool sync::SyncRoutine(Vector_t& vec, Map_t& map) {
   auto iter_last_pos = vec.rbegin();
-  for (auto it = vec.rbegin(); it != vec.rend(); ++it) {
+  for (auto it = vec.rbegin(), ite = vec.rend(); it != ite; ++it) {
     auto find_vec_in_map = map.find(*it);
     if (find_vec_in_map == map.end()) std::swap(*it, *iter_last_pos++);
   }
